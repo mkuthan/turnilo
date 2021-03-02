@@ -5,10 +5,8 @@ on:
     inputs:
       preRelease:
         description: 'Defines whether a release is final or a pre-release for internal testing, e.g "beta", "alpha" or "rc".'
-        required: false
       releaseVersion:
         description: 'Defines which part of a SemVer should be increased during the release process, e.g "minor", "major" or "patch".'
-        required: false
         default: 'minor'
 
 jobs:
@@ -18,6 +16,7 @@ jobs:
 
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     #
     # TODO: commented out for testing purposes only
@@ -57,7 +56,7 @@ jobs:
       #
 
       - name: Install release-it
-        run: npm install -g npm-cli-login release-it@13.7.1
+        run: npm install -g release-it@13.7.1
 
       - name: Release
         run: |
